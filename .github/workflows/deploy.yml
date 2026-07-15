@@ -1,0 +1,33 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - main # O cambia a 'master' si tu rama principal se llama así
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploying via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+           # 1. Navegar a la carpeta del proyecto en el VPS
+                cd ~/age-recovery
+            
+            # 2. Descargar los últimos cambios de GitHub
+            git pull origin main
+            
+            # 3. Cargar las variables de Node/npm del sistema
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # Si usa NVM
+            
+            # 4. Instalar dependencias y compilar el proyecto de React
+            npm install
+            npm run build
