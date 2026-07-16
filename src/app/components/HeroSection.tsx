@@ -26,12 +26,10 @@ export default function HeroSection() {
             className="text-5xl md:text-6xl xl:text-7xl leading-[1.05] font-display"
             style={{ fontWeight: 500 }}
           >
-            Tu mejor
-            <br />
-            versión,
+            Tu mejor versión,
             <br />
             <ShimmerText gradient="linear-gradient(90deg,#2F6FFB,#8FB4FE,#2F6FFB)">
-              revelada.
+              Revelada.
             </ShimmerText>
           </h1>
 

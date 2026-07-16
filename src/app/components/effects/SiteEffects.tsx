@@ -1,6 +1,5 @@
 import type { CSSProperties, MouseEvent, ReactNode } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ChevronRight } from "lucide-react";
 
 /**
  * Efectos visuales de marca, migrados 1:1 desde el diseño de referencia (P2):
@@ -148,7 +147,7 @@ export function BeforeAfterSlider({
   return (
     <div
       ref={ref}
-      className="ba-slider aspect-[4/3] w-full"
+      className="ba-slider aspect-square w-full"
       onMouseDown={(e) => {
         dragging.current = true;
         updateFromClientX(e.clientX);
@@ -166,12 +165,7 @@ export function BeforeAfterSlider({
           style={{ width: `${(100 / Math.max(pos, 1)) * 100}%`, maxWidth: "none" }}
         />
       </div>
-      <div className="ba-handle" style={{ left: `${pos}%` }}>
-        <div className="ba-handle-btn">
-          <ChevronRight size={14} style={{ color: "#003D6E", transform: "rotate(180deg)", marginRight: -4 }} />
-          <ChevronRight size={14} style={{ color: "#003D6E" }} />
-        </div>
-      </div>
+      <div className="ba-handle" style={{ left: `${pos}%` }} />
       <span
         className="absolute top-3 left-3 text-xs uppercase tracking-wider px-2 py-1 rounded"
         style={{ background: "rgba(0,27,51,0.65)", color: "#fff" }}
