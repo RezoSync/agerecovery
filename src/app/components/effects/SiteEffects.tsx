@@ -157,11 +157,12 @@ export function BeforeAfterSlider({
         updateFromClientX(e.touches[0].clientX);
       }}
     >
-      <img src={before} alt={labelBefore} />
+      <img src={before} alt={labelBefore} loading="lazy" />
       <div className="ba-after-wrap" style={{ width: `${pos}%` }}>
         <img
           src={after}
           alt={labelAfter}
+          loading="lazy"
           style={{ width: `${(100 / Math.max(pos, 1)) * 100}%`, maxWidth: "none" }}
         />
       </div>
