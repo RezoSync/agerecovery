@@ -173,8 +173,8 @@ html {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: #ffffff;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
+  background: transparent;
+  box-shadow: none;
 }
 .ba-handle-btn {
   position: absolute;
