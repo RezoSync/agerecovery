@@ -7,7 +7,7 @@
       <title>Age Recovery — Medicina Estética y Antienvejecimiento</title>
       <meta
         name="description"
-        content="Clínica de medicina estética y antienvejecimiento en San Luis Río Colorado, Sonora. Bioestimulación facial, ácido hialurónico, toxina botulínica, hilos tensores y más, con el Dr. Gregorio García."
+        content="Clínica de medicina estética y antienvejecimiento en San Luis Río Colorado, Sonora. Bioestimulación facial, ácido hialurónico, toxina botulínica, hilos tensores y más, con nuestro especialista."
       />
       <meta name="robots" content="index, follow" />
       <link rel="canonical" href="https://www.agerecovery.mx/" />
@@ -15,6 +15,7 @@
       <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
       <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
       <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+      <link rel="manifest" href="/manifest.webmanifest" />
       <meta name="theme-color" content="#0D2D4F" />
 
       <!-- Open Graph -->
@@ -23,8 +24,11 @@
       <meta property="og:title" content="Age Recovery — Medicina Estética y Antienvejecimiento" />
       <meta
         property="og:description"
-        content="Precisión clínica y visión estética para resultados completamente naturales. Conoce nuestros tratamientos con el Dr. Gregorio García."
+        content="Precisión clínica y visión estética para resultados completamente naturales. Conoce a nuestro especialista y nuestros tratamientos."
       />
+      <meta property="og:image" content="https://www.agerecovery.mx/og-image.jpg" />
+      <meta property="og:image:width" content="942" />
+      <meta property="og:image:height" content="1280" />
       <meta property="og:locale" content="es_MX" />
       <meta property="og:url" content="https://www.agerecovery.mx/" />
 
@@ -35,8 +39,38 @@
         name="twitter:description"
         content="Precisión clínica y visión estética para resultados completamente naturales."
       />
+      <meta name="twitter:image" content="https://www.agerecovery.mx/og-image.jpg" />
 
-      <style>html, body { height: 100%; margin: 0; } #root { height: 100%; }</style>
+      <!-- JSON-LD: entidad de negocio (MedicalClinic + LocalBusiness). Los campos
+           de dirección/geo son de ejemplo y deben confirmarse/actualizarse con el
+           dato real antes de publicar. -->
+      <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "MedicalClinic",
+          "name": "Age Recovery",
+          "url": "https://www.agerecovery.mx/",
+          "image": "https://www.agerecovery.mx/og-image.jpg",
+          "logo": "https://www.agerecovery.mx/favicon.svg",
+          "description": "Clínica de medicina estética y antienvejecimiento en San Luis Río Colorado, Sonora. Bioestimulación facial, ácido hialurónico, toxina botulínica, hilos tensores y más.",
+          "medicalSpecialty": "Estética",
+          "priceRange": "$$",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "San Luis Río Colorado",
+            "addressRegion": "Sonora",
+            "addressCountry": "MX"
+          },
+          "employee": {
+            "@type": "Physician",
+            "name": "Dr. Gregorio García",
+            "medicalSpecialty": "Estética",
+            "url": "https://www.agerecovery.mx/medico"
+          },
+          "sameAs": []
+        }
+      </script>
+
     </head>
 
     <body>
