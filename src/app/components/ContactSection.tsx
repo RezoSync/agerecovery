@@ -1,69 +1,13 @@
-import { useState, type FormEvent } from "react";
 import { motion } from "motion/react";
-import { MapPin, Phone, Instagram, Facebook, CheckCircle2, Send, Loader2 } from "lucide-react";
-import { submitContactForm } from "../services/treatmentsService";
+import { MapPin, Phone, Instagram, Facebook } from "lucide-react";
 import { AuroraBg, GlowCard, Particles } from "./effects/SiteEffects";
-import { FIELD_LIMITS, sanitizeText, validateName, validatePhone } from "../utils/validation";
+import ValoracionForm from "./ValoracionForm";
 
 const WA = "https://wa.me/6538492893?text=Hola%2C%20me%20gustar%C3%ADa%20agendar%20una%20cita";
 const INSTAGRAM = "https://www.instagram.com/dr.greg_agerecovery";
 const FACEBOOK = "https://www.facebook.com/Age.recovery";
 
-const treatmentOptions = [
-  "Bioestimulación facial",
-  "Ácido hialurónico",
-  "Toxina botulínica",
-  "Hilos tensores",
-  "Skinbooster",
-  "No estoy seguro / quiero diagnóstico",
-];
-
-type SubmitState = "idle" | "loading" | "success" | "error";
-
 export default function ContactSection() {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [interest, setInterest] = useState(treatmentOptions[0]);
-  const [status, setStatus] = useState<SubmitState>("idle");
-  const [feedback, setFeedback] = useState("");
-  const [fieldErrors, setFieldErrors] = useState<{ name?: string; phone?: string }>({});
-
-  // Handler asíncrono del formulario: valida y sanitiza los datos localmente,
-  // llama a submitContactForm (una de las funciones documentadas en
-  // services/treatmentsService.ts), maneja el estado de carga mientras
-  // "viaja" la solicitud, y muestra éxito o error según la respuesta.
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-
-    // Evita doble envío: si ya hay una solicitud en curso, no se hace nada.
-    if (status === "loading") return;
-
-    const nameError = validateName(name);
-    const phoneError = validatePhone(phone);
-    if (nameError || phoneError) {
-      setFieldErrors({ name: nameError ?? undefined, phone: phoneError ?? undefined });
-      return;
-    }
-    setFieldErrors({});
-    setStatus("loading");
-    setFeedback("");
-
-    try {
-      const result = await submitContactForm({
-        name: sanitizeText(name),
-        phone: phone.replace(/\D/g, ""),
-        interest,
-      });
-      setStatus("success");
-      setFeedback(result.message);
-      setName("");
-      setPhone("");
-    } catch (err) {
-      setStatus("error");
-      setFeedback(err instanceof Error ? err.message : "Ocurrió un error al enviar tu solicitud.");
-    }
-  }
-
   return (
     <section id="contacto" className="relative py-28 md:py-32 overflow-hidden">
       <AuroraBg />
@@ -196,135 +140,14 @@ export default function ContactSection() {
           </div>
         </motion.div>
 
-        {/* Formulario — misma lógica de envío (submitContactForm) que ya existía */}
+        {/* Formulario — envía la solicitud directamente por WhatsApp (ver ValoracionForm) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          <GlowCard className="p-8">
-            <h3 className="text-2xl mb-6 text-white font-display">Solicitar información</h3>
-
-            {status === "success" ? (
-              <div className="flex flex-col items-center gap-4 py-12">
-                <CheckCircle2 size={48} className="text-cyan" />
-                <div className="text-center">
-                  <div className="text-lg font-medium mb-1 text-white font-display">¡Mensaje enviado!</div>
-                  <div className="text-sm text-white/60">{feedback}</div>
-                </div>
-                <button onClick={() => setStatus("idle")} className="mt-2 text-xs tracking-wider uppercase text-cyan">
-                  Enviar otro mensaje
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="name" className="text-xs tracking-wider uppercase text-white/60">
-                    Nombre completo
-                  </label>
-                  <input
-                    id="name"
-                    type="text"
-                    placeholder="Tu nombre"
-                    required
-                    minLength={FIELD_LIMITS.name.min}
-                    maxLength={FIELD_LIMITS.name.max}
-                    autoComplete="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    disabled={status === "loading"}
-                    aria-invalid={Boolean(fieldErrors.name)}
-                    aria-describedby={fieldErrors.name ? "name-error" : undefined}
-                    className="px-4 py-3 text-sm outline-none focus:border-cyan/50 transition-colors disabled:opacity-60"
-                    style={{
-                      background: "rgba(255,255,255,0.04)",
-                      border: `1px solid ${fieldErrors.name ? "#f87171" : "rgba(255,255,255,0.08)"}`,
-                      borderRadius: "2px",
-                      color: "#fff",
-                    }}
-                  />
-                  {fieldErrors.name && (
-                    <p id="name-error" className="text-xs text-red-400">
-                      {fieldErrors.name}
-                    </p>
-                  )}
-                </div>
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="phone" className="text-xs tracking-wider uppercase text-white/60">
-                    Teléfono / WhatsApp
-                  </label>
-                  <input
-                    id="phone"
-                    type="tel"
-                    placeholder="(653) 000-0000"
-                    required
-                    inputMode="numeric"
-                    maxLength={20}
-                    autoComplete="tel"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    disabled={status === "loading"}
-                    aria-invalid={Boolean(fieldErrors.phone)}
-                    aria-describedby={fieldErrors.phone ? "phone-error" : undefined}
-                    className="px-4 py-3 text-sm outline-none focus:border-cyan/50 transition-colors disabled:opacity-60"
-                    style={{
-                      background: "rgba(255,255,255,0.04)",
-                      border: `1px solid ${fieldErrors.phone ? "#f87171" : "rgba(255,255,255,0.08)"}`,
-                      borderRadius: "2px",
-                      color: "#fff",
-                    }}
-                  />
-                  {fieldErrors.phone && (
-                    <p id="phone-error" className="text-xs text-red-400">
-                      {fieldErrors.phone}
-                    </p>
-                  )}
-                </div>
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="interest" className="text-xs tracking-wider uppercase text-white/60">
-                    Tratamiento de interés
-                  </label>
-                  <select
-                    id="interest"
-                    value={interest}
-                    onChange={(e) => setInterest(e.target.value)}
-                    disabled={status === "loading"}
-                    className="px-4 py-3 text-sm outline-none focus:border-cyan/50 transition-colors disabled:opacity-60"
-                    style={{ background: "#06263F", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "2px", color: "#fff" }}
-                  >
-                    {treatmentOptions.map((s) => (
-                      <option key={s} value={s} style={{ background: "#06263F" }}>
-                        {s}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <button
-                  type="submit"
-                  disabled={status === "loading"}
-                  className="flex items-center justify-center gap-3 py-4 text-sm tracking-wider uppercase font-medium transition-all hover:-translate-y-0.5 disabled:opacity-60"
-                  style={{ background: "linear-gradient(135deg,#008AC4,#003D6E)", color: "#ffffff", borderRadius: "2px" }}
-                >
-                  {status === "loading" ? (
-                    <>
-                      <Loader2 size={16} className="animate-spin" /> Enviando…
-                    </>
-                  ) : (
-                    <>
-                      <Send size={15} /> Solicitar valoración
-                    </>
-                  )}
-                </button>
-
-                {status === "error" && (
-                  <p role="alert" aria-live="assertive" className="text-xs text-red-400 font-medium">
-                    {feedback}
-                  </p>
-                )}
-              </form>
-            )}
-          </GlowCard>
+          <ValoracionForm />
         </motion.div>
       </div>
     </section>

@@ -84,6 +84,12 @@ export function validateMessage(raw: string, required = false): string | null {
   return null;
 }
 
+export function validateInterest(raw: string): string | null {
+  const value = sanitizeText(raw);
+  if (!value) return "Selecciona un tratamiento de interés.";
+  return null;
+}
+
 /** Normaliza el teléfono a solo dígitos, listo para enviar. */
 export function digitsOnly(raw: string): string {
   return raw.replace(/\D/g, "");
