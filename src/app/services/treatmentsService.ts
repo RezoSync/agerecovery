@@ -65,6 +65,18 @@ export interface Treatment {
   duration: string;
   sessions: string;
   results: string;
+  /** Beneficios clave del tratamiento, en formato de lista. */
+  benefits: string[];
+  /** Cómo se lleva a cabo el procedimiento, paso a paso en prosa. */
+  procedure: string;
+  /** Qué esperar durante la recuperación inmediata (horas/días posteriores). */
+  recovery: string;
+  /** Recomendaciones de cuidado posterior. */
+  aftercare: string[];
+  /** Perfil de paciente ideal para este tratamiento. */
+  idealFor: string[];
+  /** Contraindicaciones y casos en los que no se recomienda el tratamiento. */
+  contraindications: string[];
 }
 
 // "Base de datos" local — el día de mañana esto se reemplaza por una
@@ -82,6 +94,33 @@ const TREATMENTS_DB: Treatment[] = [
     duration: "45 minutos por sesión",
     sessions: "3 a 4 sesiones, separadas por 3-4 semanas",
     results: "Visibles a partir de la 2da sesión, óptimos a los 3 meses",
+    benefits: [
+      "Estimula la producción natural de colágeno y elastina",
+      "Mejora la firmeza y densidad de la piel desde la dermis profunda",
+      "Textura más uniforme y luminosa",
+      "Efecto progresivo y de aspecto natural, sin volumen añadido",
+    ],
+    procedure:
+      "Tras limpiar la piel y aplicar anestesia tópica, se administra el bioestimulador mediante microinyecciones distribuidas estratégicamente en las zonas a tratar. El procedimiento es ambulatorio y no requiere incisiones ni sedación.",
+    recovery:
+      "Puede haber enrojecimiento leve, pequeñas pápulas o sensibilidad en los puntos de inyección durante 24-48 horas. La mayoría de los pacientes retoma su rutina el mismo día.",
+    aftercare: [
+      "Evitar exposición solar directa y usar protector solar SPF 50+",
+      "No aplicar maquillaje en las primeras 12 horas",
+      "Evitar sauna, ejercicio intenso y alcohol durante 48 horas",
+      "Mantener buena hidratación de la piel",
+    ],
+    idealFor: [
+      "Pacientes con signos iniciales de flacidez o pérdida de firmeza",
+      "Quienes buscan prevenir el envejecimiento sin cambiar volúmenes faciales",
+      "Piel con textura opaca o irregular",
+    ],
+    contraindications: [
+      "Embarazo o lactancia",
+      "Infecciones activas en la zona a tratar",
+      "Enfermedades autoinmunes no controladas",
+      "Alergia conocida a los componentes del producto",
+    ],
   },
   {
     slug: "acido-hialuronico",
@@ -95,6 +134,33 @@ const TREATMENTS_DB: Treatment[] = [
     duration: "30-50 minutos según zona",
     sessions: "1 sesión, con posible retoque a las 4 semanas",
     results: "Inmediatos, con asentamiento final a las 2 semanas",
+    benefits: [
+      "Restaura volumen perdido en pómulos, óvalo facial y surcos",
+      "Técnica de microcánula: menos hematomas, mayor precisión",
+      "Resultado inmediato y completamente reversible",
+      "Respeta la expresividad y proporciones naturales del rostro",
+    ],
+    procedure:
+      "Se aplica anestesia tópica y, mediante microcánula o aguja fina según la zona, se inyecta ácido hialurónico reticulado de alta densidad en los puntos de volumen previamente marcados en la valoración. El especialista trabaja por capas para lograr un resultado armónico.",
+    recovery:
+      "Es normal presentar hinchazón leve y algún hematoma puntual durante 3-5 días. El volumen definitivo se aprecia una vez que baja la inflamación, alrededor de la segunda semana.",
+    aftercare: [
+      "Aplicar frío local las primeras horas si hay inflamación",
+      "Evitar masajear la zona tratada durante 48 horas",
+      "No exponerse a calor extremo (sauna, sol directo) por una semana",
+      "Evitar antiinflamatorios no indicados por el médico los primeros días",
+    ],
+    idealFor: [
+      "Pacientes con pérdida de volumen en pómulos, mentón o surcos nasogenianos",
+      "Quienes buscan definir el contorno facial de forma sutil",
+      "Resultados naturales sin cirugía",
+    ],
+    contraindications: [
+      "Embarazo o lactancia",
+      "Infecciones activas o inflamación en la zona a tratar",
+      "Trastornos de coagulación",
+      "Alergia conocida al ácido hialurónico",
+    ],
   },
   {
     slug: "toxina-botulinica",
@@ -108,6 +174,33 @@ const TREATMENTS_DB: Treatment[] = [
     duration: "20 minutos",
     sessions: "1 sesión cada 4-6 meses",
     results: "Visibles a partir del día 3, completos a los 14 días",
+    benefits: [
+      "Suaviza líneas de expresión dinámicas (frente, entrecejo, patas de gallo)",
+      "Dosificación milimétrica y personalizada, sin perder expresividad",
+      "Procedimiento rápido, sin tiempo de recuperación",
+      "También previene la formación de nuevas líneas de expresión",
+    ],
+    procedure:
+      "Con el rostro en reposo y en gesto, se marcan los puntos de aplicación según la musculatura de cada paciente. La toxina se administra con aguja ultrafina en microdosis; el procedimiento no requiere anestesia.",
+    recovery:
+      "Sin tiempo de inactividad: la mayoría de los pacientes regresa a sus actividades de inmediato. Puede haber enrojecimiento puntual leve que desaparece en minutos u horas.",
+    aftercare: [
+      "Permanecer en posición vertical durante 4 horas tras la aplicación",
+      "Evitar tocar o masajear la zona tratada el mismo día",
+      "No hacer ejercicio intenso ni exponerse a calor extremo por 24 horas",
+      "Evitar acostarse boca abajo el día del procedimiento",
+    ],
+    idealFor: [
+      "Líneas de expresión dinámicas visibles al gesticular",
+      "Pacientes que buscan prevención desde etapas tempranas",
+      "Quienes desean un resultado natural, sin perder movilidad facial",
+    ],
+    contraindications: [
+      "Embarazo o lactancia",
+      "Enfermedades neuromusculares (ej. miastenia gravis)",
+      "Infección activa en la zona a tratar",
+      "Alergia conocida a la toxina botulínica",
+    ],
   },
   {
     slug: "hilos-tensores",
@@ -121,6 +214,33 @@ const TREATMENTS_DB: Treatment[] = [
     duration: "40-60 minutos",
     sessions: "1 sesión, efecto sostenido 12-18 meses",
     results: "Lifting inmediato visible, mejora progresiva en 8 semanas",
+    benefits: [
+      "Efecto lifting inmediato sin cirugía ni incisiones",
+      "Reposiciona tejidos descendidos del óvalo facial",
+      "Estimula colágeno nuevo de forma continua tras la aplicación",
+      "Hilos 100% reabsorbibles, sin dejar material permanente",
+    ],
+    procedure:
+      "Con anestesia local, se insertan cánulas finas siguiendo vectores de tensión previamente diseñados para cada rostro. Los hilos de PDO quedan anclados bajo la piel, elevando y reafirmando el tejido tratado.",
+    recovery:
+      "Puede haber inflamación, sensibilidad o pequeños hematomas durante 3-7 días, además de una leve sensación de tirantez que es normal y esperada mientras el tejido se adapta.",
+    aftercare: [
+      "Evitar movimientos amplios de masticación y gestos exagerados por 1 semana",
+      "Dormir boca arriba durante los primeros días",
+      "No aplicar masajes faciales ni tratamientos estéticos en la zona por 3-4 semanas",
+      "Evitar procedimientos dentales no urgentes durante 2 semanas",
+    ],
+    idealFor: [
+      "Flacidez moderada del óvalo facial, mejillas o cejas",
+      "Pacientes que buscan efecto lifting sin cirugía",
+      "Piel con buena calidad pero descenso de tejidos",
+    ],
+    contraindications: [
+      "Embarazo o lactancia",
+      "Trastornos de coagulación",
+      "Infecciones activas en la zona a tratar",
+      "Piel muy fina o con exceso de flacidez severa (candidato a cirugía)",
+    ],
   },
   {
     slug: "skinbooster",
@@ -134,6 +254,33 @@ const TREATMENTS_DB: Treatment[] = [
     duration: "30 minutos",
     sessions: "3 sesiones mensuales, mantenimiento cada 6 meses",
     results: "Luminosidad visible desde la 1ra sesión",
+    benefits: [
+      "Hidratación intradérmica profunda y de larga duración",
+      "Mejora textura, elasticidad y luminosidad de la piel",
+      "No añade volumen: ideal como mantenimiento entre protocolos mayores",
+      "Aplicable en rostro, cuello y escote",
+    ],
+    procedure:
+      "Se aplican microinyecciones de ácido hialurónico no reticulado, distribuidas uniformemente en la dermis mediante técnica de puntos o microcánula, según la zona y sensibilidad del paciente.",
+    recovery:
+      "Puede haber pequeñas pápulas o enrojecimiento que desaparecen en 24-48 horas. No hay tiempo de inactividad y la mayoría retoma su rutina de inmediato.",
+    aftercare: [
+      "Evitar maquillaje durante las primeras 12 horas",
+      "Usar protector solar SPF 50+ a diario",
+      "Mantener la piel bien hidratada con productos suaves",
+      "Evitar exfoliantes o ácidos fuertes por 48 horas",
+    ],
+    idealFor: [
+      "Piel deshidratada, opaca o con textura irregular",
+      "Pacientes que buscan luminosidad sin cambiar volúmenes",
+      "Como complemento de mantenimiento entre otros tratamientos",
+    ],
+    contraindications: [
+      "Embarazo o lactancia",
+      "Infecciones activas en la zona a tratar",
+      "Alergia conocida al ácido hialurónico",
+      "Trastornos de coagulación no controlados",
+    ],
   },
   {
     slug: "plasma-rico-plaquetas",
@@ -147,6 +294,33 @@ const TREATMENTS_DB: Treatment[] = [
     duration: "50 minutos (incluye extracción y procesamiento)",
     sessions: "3 sesiones, separadas por 4 semanas",
     results: "Progresivos, óptimos a los 2-3 meses",
+    benefits: [
+      "100% autólogo: tu propio plasma, sin materiales ajenos al cuerpo",
+      "Acelera la regeneración celular natural de la piel",
+      "Mejora textura, luminosidad y firmeza de forma progresiva",
+      "Muy baja probabilidad de reacciones alérgicas por ser material propio",
+    ],
+    procedure:
+      "Se extrae una muestra de sangre del paciente y se centrifuga para concentrar las plaquetas ricas en factores de crecimiento. Ese plasma se reinyecta en el rostro mediante microinyecciones o microneedling, según el protocolo indicado.",
+    recovery:
+      "Es común presentar enrojecimiento tipo 'efecto vampiro' e hinchazón leve durante 24-48 horas. La piel puede sentirse tirante los primeros días mientras se regenera.",
+    aftercare: [
+      "Evitar maquillaje durante las primeras 24 horas",
+      "Usar protector solar SPF 50+ estrictamente",
+      "No aplicar productos con ácidos o retinoides por 3-4 días",
+      "Mantener buena hidratación oral y tópica",
+    ],
+    idealFor: [
+      "Pacientes que buscan regeneración y mejora general de la piel",
+      "Piel con signos de fatiga, deshidratación o pérdida de luminosidad",
+      "Quienes prefieren tratamientos 100% biocompatibles",
+    ],
+    contraindications: [
+      "Trastornos de coagulación o enfermedades hematológicas",
+      "Infecciones activas o enfermedades de la piel en la zona a tratar",
+      "Embarazo o lactancia",
+      "Tratamiento con anticoagulantes no controlado",
+    ],
   },
 ];
 

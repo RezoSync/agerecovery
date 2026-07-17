@@ -116,6 +116,20 @@ export default function TreatmentsList() {
                           </span>
                         ))}
                       </div>
+                      <div className="grid grid-cols-3 gap-3 pt-4 border-t border-white/15">
+                        <div className="flex flex-col gap-1">
+                          <span className="text-sm text-white font-medium">{t.duration}</span>
+                          <span className="text-[10px] tracking-wider uppercase text-white/60">Duración</span>
+                        </div>
+                        <div className="flex flex-col gap-1">
+                          <span className="text-sm text-white font-medium">{t.sessions}</span>
+                          <span className="text-[10px] tracking-wider uppercase text-white/60">Sesiones</span>
+                        </div>
+                        <div className="flex flex-col gap-1">
+                          <span className="text-sm text-white font-medium">{t.results}</span>
+                          <span className="text-[10px] tracking-wider uppercase text-white/60">Resultados</span>
+                        </div>
+                      </div>
                       <span className="inline-flex items-center gap-2 text-xs tracking-wider uppercase text-white">
                         Ver detalle <ChevronRight size={12} />
                       </span>

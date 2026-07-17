@@ -12,7 +12,7 @@ const navItems = [
   { to: "/tratamientos", label: "Tratamientos" },
   { to: "/metodo", label: "Método" },
   { to: "/filosofia", label: "Filosofía" },
-  { to: "/medico", label: "Dr. Gregorio García" },
+  { to: "/medico", label: "Especialista" },
 ];
 
 interface HeaderProps {
