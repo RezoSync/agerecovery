@@ -1,0 +1,175 @@
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Age Recovery — sistema de diseño
+ * Migrado desde el diseño de referencia (Proyecto A): mood oscuro tipo
+ * "clínica tech", navy profundo + cyan de marca. El modo claro original
+ * queda disponible como `.theme-light` por si se necesita en el futuro
+ * (formularios impresos, modo alto-contraste, etc.) pero deja de ser el
+ * tema por defecto del sitio.
+ */
+:root {
+  --font-size: 16px;
+
+  /* Paleta de marca Age Recovery, alineada 1:1 con el diseño de referencia */
+  --navy: #003D6E;
+  --navy-deep: #001B33;
+  --navy-card: #06263F;
+  --cyan: #008AC4;
+  --cyan-light: #4FB8E8;
+  --cyan-soft: rgba(0, 138, 196, 0.16);
+  --cyan-pale: rgba(0, 138, 196, 0.08);
+  --ivory: #FAF8F4;
+  --gold: #B89456;
+  --ink: #0E2235;
+  --ink-soft: #46596A;
+
+  --background: var(--navy-deep);
+  --foreground: #ffffff;
+  --card: var(--navy-card);
+  --card-foreground: #ffffff;
+  --popover: var(--navy-card);
+  --popover-foreground: #ffffff;
+  --primary: var(--cyan);
+  --primary-foreground: #ffffff;
+  --secondary: rgba(255, 255, 255, 0.08);
+  --secondary-foreground: #ffffff;
+  --muted: rgba(255, 255, 255, 0.08);
+  --muted-foreground: rgba(255, 255, 255, 0.62);
+  --accent: var(--cyan-soft);
+  --accent-foreground: #ffffff;
+  --destructive: #e24b4a;
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.05);
+  --input-background: rgba(255, 255, 255, 0.05);
+  --switch-background: var(--cyan);
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: var(--cyan);
+  --radius: 0.125rem;
+  --sidebar: var(--navy-card);
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: var(--cyan);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: rgba(255, 255, 255, 0.08);
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-ring: var(--cyan);
+}
+
+/* Variante clara original del proyecto — no se usa por defecto tras la
+   migración, pero se conserva por si alguna sección la necesita. */
+.theme-light {
+  --background: var(--ivory);
+  --foreground: var(--ink);
+  --card: #ffffff;
+  --card-foreground: var(--ink);
+  --popover: #ffffff;
+  --popover-foreground: var(--ink);
+  --primary: var(--navy-deep);
+  --primary-foreground: #ffffff;
+  --secondary: #F3F9FB;
+  --secondary-foreground: var(--navy-deep);
+  --muted: #F3F9FB;
+  --muted-foreground: var(--ink-soft);
+  --accent: #E7F3F8;
+  --accent-foreground: var(--navy-deep);
+  --border: rgba(0, 61, 111, 0.12);
+  --input: transparent;
+  --input-background: #F3F9FB;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
+  --color-navy-card: var(--navy-card);
+  --color-cyan: var(--cyan);
+  --color-cyan-light: var(--cyan-light);
+  --color-cyan-soft: var(--cyan-soft);
+  --color-cyan-pale: var(--cyan-pale);
+  --color-ivory: var(--ivory);
+  --color-gold: var(--gold);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --font-display: "Playfair Display", serif;
+  --font-sans: "Plus Jakarta Sans", sans-serif;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+  }
+
+  html {
+    font-size: var(--font-size);
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  label {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  button {
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  input, select {
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-normal);
+    line-height: 1.5;
+  }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--navy-deep); }
+  ::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 2px; }
+}
